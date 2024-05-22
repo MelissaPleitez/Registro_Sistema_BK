@@ -8,6 +8,12 @@ class Api::ClientsController < ApplicationController
       render json: @clients
     end
 
+    def show 
+      @client = current_user.clients.find(params[:id])
+      render json: @client, status: :ok
+    end
+
+
     def create
       @clients = current_user.clients.build(client_params)
         if @clients.save
@@ -18,16 +24,19 @@ class Api::ClientsController < ApplicationController
     end
 
     def update
-      if @clients.update(client_params)
-        render json: @clients, status: :ok
+      @client = current_user.clients.find(params[:id])
+      if @client.update(client_params)
+        render json: @client, status: :ok
       else
-        render json: { errors: @clients.errors}, status: :unprocessable_entity
+        render json: { errors: @client.errors}, status: :unprocessable_entity
       end
     end
 
     def destroy
-      @clients.destroy
-      render json: { message: 'Client deleted successfully' }, status: :ok
+      @client = current_user.clients.find(params[:id])
+      if @client.destroy
+        render json: { message: 'Client deleted successfully' }, status: :ok
+      end
     end
 
   

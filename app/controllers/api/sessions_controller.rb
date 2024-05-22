@@ -15,4 +15,9 @@ class Api::SessionsController < ApplicationController
       end
     end
 
+    def destroy
+      session.delete(:user_id)
+      render json: { message: "Session closed" }
+    end 
+
 end
