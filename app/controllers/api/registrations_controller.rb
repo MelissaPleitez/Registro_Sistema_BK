@@ -14,11 +14,6 @@ class Api::RegistrationsController < ApplicationController
         end
     end
     
-    def destroy
-      render json: { message: "Session closed" }
-    end 
-
-
     private
 
     def registration_params

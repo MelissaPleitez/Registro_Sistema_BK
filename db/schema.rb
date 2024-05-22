@@ -10,22 +10,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_21_165303) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_21_215826) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "clients", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "email"
+    t.string "client_email"
     t.string "tel_number"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_clients_on_user_id"
+  end
+
+  create_table "directions", force: :cascade do |t|
+    t.string "street"
+    t.string "city"
+    t.string "postal_code"
+    t.bigint "client_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_directions_on_client_id"
+  end
+
+  create_table "identifications", force: :cascade do |t|
+    t.string "identification_number"
+    t.string "breadcast_date"
+    t.bigint "client_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_identifications_on_client_id"
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "clients", "users"
+  add_foreign_key "directions", "clients"
+  add_foreign_key "identifications", "clients"
 end

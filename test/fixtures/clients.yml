@@ -3,11 +3,13 @@
 one:
   first_name: MyString
   last_name: MyString
-  email: MyString
+  client_email: MyString
   tel_number: MyString
+  user: one
 
 two:
   first_name: MyString
   last_name: MyString
-  email: MyString
+  client_email: MyString
   tel_number: MyString
+  user: two

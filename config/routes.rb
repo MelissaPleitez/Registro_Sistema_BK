@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   namespace :api do 
     resource :registrations, only: [:create]
     post '/login', to: 'sessions#create'
+    post '/client', to: 'clients#create'
+    get '/clients', to: 'clients#index'
   end
   # Defines the root path route ("/")
   # root "posts#index"

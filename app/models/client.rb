@@ -1,9 +1,11 @@
 class Client < ApplicationRecord
-    belongs_to :user, class_name: "user", foreign_key: "user_id"
+  belongs_to :user
+  has_many :directions
+  has_many :identifications
 
-    validates :email, presence: true, 
-    uniqueness: true
-    validates :first_name, presence: true 
-    validates :last_name, presence: true 
-    validates :tel_number, presence: true 
+
+  validates :client_email, presence: true
+  validates :first_name, presence: true 
+  validates :last_name, presence: true 
+  validates :tel_number, presence: true 
 end
